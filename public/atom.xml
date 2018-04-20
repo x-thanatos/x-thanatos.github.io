@@ -6,7 +6,7 @@
   <link href="/public/atom.xml" rel="self"/>
   
   <link href="https://x-thanatos.github.io/public/"/>
-  <updated>2018-04-19T09:07:23.040Z</updated>
+  <updated>2018-04-20T01:29:27.818Z</updated>
   <id>https://x-thanatos.github.io/public/</id>
   
   <author>
@@ -18,18 +18,18 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://x-thanatos.github.io/public/2018/04/19/hello-world/"/>
-    <id>https://x-thanatos.github.io/public/2018/04/19/hello-world/</id>
-    <published>2018-04-19T09:07:23.040Z</published>
-    <updated>2018-04-19T09:07:23.040Z</updated>
+    <link href="https://x-thanatos.github.io/public/2018/04/20/hello-world/"/>
+    <id>https://x-thanatos.github.io/public/2018/04/20/hello-world/</id>
+    <published>2018-04-20T01:29:27.817Z</published>
+    <updated>2018-04-20T01:29:27.818Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to my bolg.</p>]]></content>
+    <content type="html"><![CDATA[<p>Welcome to my blog.</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Welcome to my bolg.&lt;/p&gt;
+        &lt;p&gt;Welcome to my blog.&lt;/p&gt;
 
       
     
