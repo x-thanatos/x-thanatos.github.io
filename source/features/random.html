@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>随机数生成器</title>
+    <meta content="*/*, designed by 小芳">
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff, #7ce0ff);
+        }
+
+        .btn {
+            position: relative;
+            display: block;
+            margin: 30px auto;
+            cursor: pointer;
+            padding: 0;
+            overflow: hidden;
+            border-width: 0;
+            outline: none;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+            background-color: #22b5ff;
+            color: #ecf0f1;
+            transition: background-color .3s;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #22b5ff;
+        }
+
+        .btn > * {
+            position: relative;
+        }
+
+        .btn span {
+            display: block;
+            padding: 12px 24px;
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            width: 0;
+            padding-top: 0;
+            border-radius: 100%;
+            background-color: rgba(236, 240, 241, .3);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:active:before {
+            width: 120%;
+            padding-top: 120%;
+            transition: width .2s ease-out, padding-top .2s ease-out;
+        }
+
+        .view {
+            margin: auto;
+            text-align: center;
+        }
+
+        h3 {
+            color: #22b5ff;
+        }
+
+        .input {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .input li {
+            margin-bottom: 15px;
+        }
+
+        .input label {
+            color: #585858;
+        }
+
+        .input input {
+            color: #585858;
+            border-radius: 4px;
+            outline: none;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        #random {
+            margin: 0;
+            color: #22b5ff;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px #1a648f;
+        }
+
+        .operation {
+            margin: auto;
+        }
+
+        .operation button {
+            font-size: 18px;
+        }
+
+        .operation button.start {
+            background-color: #03cf1c;
+        }
+
+        .operation button.stop {
+            background-color: #ff4f22;
+        }
+
+        #results {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        #results li {
+            float: left;
+            margin: 0 10px;
+            width: 40px;
+            text-align: center;
+            color: #ff235f;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="view">
+    <h3>随机数生成器</h3>
+
+    <ul class="input">
+        <li>
+            <label for="min">最小值：</label>
+            <input type="number" id="min" min="0" placeholder="默认值：0">
+        </li>
+        <li>
+            <label for="max">最大值：</label>
+            <input type="number" id="max" min="20" placeholder="默认值：1600">
+        </li>
+        <li>
+            <label for="size">结果数：</label>
+            <input type="number" id="size" min="1" placeholder="默认值：20">
+        </li>
+    </ul>
+
+
+    <p id="random">0</p>
+
+    <div class="operation">
+        <button type="button" class="btn start"
+                id="start" onclick="window.start()">
+            <span>开始</span>
+        </button>
+        <button type="button" class="btn stop"
+                style="display: none"
+                id="stop" onclick="window.stop()">
+            <span>停止</span>
+        </button>
+    </div>
+
+    <ul id="results">
+
+    </ul>
+</div>
+
+</body>
+<script>
+    (function (window) {
+        var constant = {
+            min: 0,
+            max: 1600,
+            size: size,
+            interval: 50,
+            timer: -1,
+            flag: -1,
+            results: []
+        };
+        var dom = {
+            min: document.getElementById('min'),
+            max: document.getElementById('max'),
+            size: document.getElementById('size'),
+            random: document.getElementById('random'),
+            start: document.getElementById('start'),
+            stop: document.getElementById('stop'),
+            results: document.getElementById('results')
+        };
+
+        function setMinMax() {
+            constant.min = parseInt(dom.min.value) || 0;
+            constant.max = parseInt(dom.max.value) || 1600;
+            constant.size = parseInt(dom.size.value) || 20;
+        }
+
+        function getNumber(start, end) {
+            var random = Math.random() * constant.max;
+            var out = random.toFixed(0);
+
+            if (constant.results.length === constant.size) {
+                return constant.flag
+            }
+
+            if ((start < random < end) && constant.results.indexOf(out) === -1) {
+                return out
+            }
+
+            return getNumber(start, end)
+        }
+
+        function setButton(isStart) {
+            dom.start.style.display = isStart ? 'none' : '';
+            dom.stop.style.display = isStart ? '' : 'none';
+        }
+
+        function start() {
+            setButton(true);
+            setMinMax();
+            constant.timer = setInterval(function () {
+                dom.random.innerText = getNumber(constant.min, constant.max)
+            }, constant.interval)
+        }
+
+        function stop() {
+            setButton(false);
+            clearInterval(constant.timer);
+            var value = dom.random.innerText;
+            if (constant.results.length <= constant.size) {
+                constant.results.push(value);
+                if (parseInt(value) !== constant.flag) {
+                    dom.results.innerHTML += '<li>' + value + '</li>'
+                }
+            } else {
+                alert('计数数量已达上限：' + constant.size)
+            }
+        }
+
+        setButton(false);
+
+        // IE
+        window.start = start;
+        window.stop = stop;
+    }(window));
+</script>
+</html>
