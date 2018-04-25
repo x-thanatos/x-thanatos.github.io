@@ -6,7 +6,7 @@
   <link href="/public/atom.xml" rel="self"/>
   
   <link href="https://x-thanatos.github.io/public/"/>
-  <updated>2018-04-20T01:40:37.524Z</updated>
+  <updated>2018-04-25T01:23:43.192Z</updated>
   <id>https://x-thanatos.github.io/public/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>罗斌交接概要</title>
+    <link href="https://x-thanatos.github.io/public/2018/04/25/summary/"/>
+    <id>https://x-thanatos.github.io/public/2018/04/25/summary/</id>
+    <published>2018-04-25T01:23:43.177Z</published>
+    <updated>2018-04-25T01:23:43.192Z</updated>
+    
+    <content type="html"><![CDATA[<!-- TOC --><p>[toc]</p><!-- TOC --><h2 id="祺迹车管"><a href="#祺迹车管" class="headerlink" title="祺迹车管"></a>祺迹车管</h2><blockquote><p> <a href="https://github.com/dbjtech/qjcg-frontend" target="_blank" rel="noopener">新版源码地址</a><br> <a href="https://github.com/dbjtech/qjcg-frontend-old" target="_blank" rel="noopener">旧版源码地址</a></p></blockquote><h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><table><thead><tr><th style="text-align:center">版本</th><th style="text-align:center">测试网</th><th style="text-align:center">现网</th></tr></thead><tbody><tr><td style="text-align:center">新版(&gt;=2.6)</td><td style="text-align:center"><a href="https://www-alpha.qijigps.com/main" target="_blank" rel="noopener">https://www-alpha.qijigps.com/main</a></td><td style="text-align:center"><a href="https://www.qijigps.com/main/" target="_blank" rel="noopener">https://www.qijigps.com/main/</a></td></tr><tr><td style="text-align:center">旧版 (&lt;2.6)</td><td style="text-align:center"><a href="https://www-alpha.qijigps.com/main/old/" target="_blank" rel="noopener">https://www-alpha.qijigps.com/main/old/</a></td><td style="text-align:center"><a href="https://www.qijigps.com/main/old/" target="_blank" rel="noopener">https://www.qijigps.com/main/old/</a></td></tr></tbody></table><blockquote><p>说明: 由于老版本项目不再维护，故本文档只记新版本。</p></blockquote><ul><li>新版(测试账号)<ul><li>测试网账号：13631260632，密码：123456</li><li>现网账号：13750060787，密码：334455</li></ul></li></ul><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><ol><li>项目结构</li><li>应用架构，详细参见<a href="https://github.com/dbjtech/qjcg-frontend/blob/master/docs/ARCHITECTURE.md" target="_blank" rel="noopener">此处</a></li><li>开发文档，详细参见<a href="https://github.com/dbjtech/qjcg-frontend/blob/master/docs/DEVELOPMENT.md" target="_blank" rel="noopener">此处</a></li><li>开发向导，详细参见<a href="https://github.com/dbjtech/qjcg-frontend/tree/master/docs/guide" target="_blank" rel="noopener">此处</a></li><li>三方依赖</li><li>测试网部署流程</li><li>CI(github-webhooks =&gt; jenkins pipeline)，<a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">github-webhooks</a>，<a href="https://jenkins.io/doc/book/pipeline/" target="_blank" rel="noopener">jenkins-pipeline</a></li></ol><h2 id="帮助手册"><a href="#帮助手册" class="headerlink" title="帮助手册"></a>帮助手册</h2><blockquote><p><a href="https://github.com/dbjtech/qjcg-frontend-mpa" target="_blank" rel="noopener">源码地址</a></p></blockquote><h3 id="项目地址-1"><a href="#项目地址-1" class="headerlink" title="项目地址"></a>项目地址</h3><ol><li>测试网：<a href="https://www-alpha.qijigps.com/guide" target="_blank" rel="noopener">https://www-alpha.qijigps.com/guide</a></li><li>现网：<a href="https://www.qijigps.com/guide" target="_blank" rel="noopener">https://www.qijigps.com/guide</a></li></ol><h3 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h3><ol><li>项目结构</li><li>应用架构</li><li>开发文档</li><li>开发向导</li><li>三方依赖</li><li>测试网部署流程</li></ol><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote><ul><li>珠海测试网：访问用户名：@chengdu， 端口：23822，密码：chengdu@dbjtech<ul><li>车管测试网仓库在010机器上  ssh vhost@vhost-010  密码：vhost</li></ul></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- TOC --&gt;
+&lt;p&gt;[toc]&lt;/p&gt;
+&lt;!-- TOC --&gt;
+&lt;h2 id=&quot;祺迹车管&quot;&gt;&lt;a href=&quot;#祺迹车管&quot; class=&quot;headerlink&quot; title=&quot;祺迹车管&quot;&gt;&lt;/a&gt;祺迹车管&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt; &lt;a href=&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
-    <link href="https://x-thanatos.github.io/public/2018/04/20/hello-world/"/>
-    <id>https://x-thanatos.github.io/public/2018/04/20/hello-world/</id>
-    <published>2018-04-20T01:40:37.523Z</published>
-    <updated>2018-04-20T01:40:37.524Z</updated>
+    <link href="https://x-thanatos.github.io/public/2018/04/25/hello-world/"/>
+    <id>https://x-thanatos.github.io/public/2018/04/25/hello-world/</id>
+    <published>2018-04-25T01:23:43.130Z</published>
+    <updated>2018-04-25T01:23:43.130Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to my blog.</p>]]></content>
     
