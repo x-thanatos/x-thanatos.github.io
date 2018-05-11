@@ -35,7 +35,7 @@ title: 架构文档
 - 非页面级组件按功能细分成子组件，抽离跨页面共用子组件
 	 1. 简单组件使用.vue单文件组件编写
 	 2. vue提供了.vue单文件组件`scope style`功能，但由于`CSSOM`性能问题并且便于培养良好的代码命名习惯，开发者应该谨慎使用此特性
-	 3. 复杂组件使用[vue-class-component](https://github.com/vuejs/vue-class-component)，[vue-property-decorator](https://github.com/kaorun343/vue-property-decorator)进行细粒度拆分(向```typescript```平滑过渡)
+	 3. 复杂组件使用[vue-class-component](https://github.com/vuejs/vue-class-component)，[vue-property-decorator](https://github.com/kaorun343/vue-property-decorator)进行细粒度拆分，向`typescript`平滑过渡
 
 ``` typescript
 // eg:
@@ -90,7 +90,7 @@ export class UserComponent extends Vue {
 
 ### 状态管理（undetermined）
 
-> 考虑引入[vuex-class](https://github.com/ktsn/vuex-class/)(向```typescript```平滑过渡)
+ > 考虑引入[vuex-class](https://github.com/ktsn/vuex-class/)，向`typescript`平滑过渡
 
 #### 概念
 
