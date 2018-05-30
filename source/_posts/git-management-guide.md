@@ -2,8 +2,6 @@
 title: Git 管理使用指导
 ---
 
-[TOC]
-
 # Git 管理使用指导
 
 ## commit

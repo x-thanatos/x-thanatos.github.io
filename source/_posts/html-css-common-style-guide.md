@@ -2,8 +2,6 @@
 title: HTML/CSS 通用规则
 ---
 
-[TOC]
-
 # HTML/CSS 通用规则
 
 ## 通用风格规则

@@ -2,8 +2,6 @@
 title: SCSS 代码规范
 ---
 
-[TOC]
-
 # SCSS 代码规范
 
 ## 前言

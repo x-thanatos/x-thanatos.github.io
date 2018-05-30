@@ -2,8 +2,6 @@
 title: HTML 代码规范
 ---
 
-[TOC]
-
 # HTML 代码规范
 
 ## 通用规则

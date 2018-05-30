@@ -2,16 +2,14 @@
 title: git-flow 开发模型
 ---
 
-[TOC]
-
 ## git-flow 开发模型
 
-参见：
+参考自以下几篇文章：
 - https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 - http://www.ruanyifeng.com/blog/2015/12/git-workflow.html
 - http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html
 
-### 本项目定制规范
+### 定制规范
 
 #### 开发人员
 
