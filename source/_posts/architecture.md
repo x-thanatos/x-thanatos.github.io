@@ -2,13 +2,12 @@
 title: 架构文档
 ---
 
-[TOC]
-
 # 架构文档
 
 ## 架构概览图
 
-> todo: 未完成
+![架构概览](/public/images/architecture.png)
+
 
 ## 开发模型
 
@@ -88,20 +87,20 @@ export class UserComponent extends Vue {
 }
 ```
 
-### 状态管理（undetermined）
+### 状态管理
 
  > 考虑引入[vuex-class](https://github.com/ktsn/vuex-class/)，向`typescript`平滑过渡
 
 #### 概念
 
 - 采用flux设计，[详细信息](http://facebook.github.io/flux/docs/overview.html#content)
-- 项目依赖[vuex](https://vuex.vuejs.org/en/)，专为Vue实现的类flux状态管理器
+- 依赖[vuex](https://vuex.vuejs.org/en/)，专为Vue实现的类flux状态管理器
 - 为减小store在整个项目的复杂度以及不必要的数据维护，开发者应当深入理解该状态管理模型。
 - 并不是所有的数据都会交给store来管理（如页面中一次性消费的数据以及一些不需要持续维护管理的数据）
 
 #### 设计哲学
 
-![@vuex工作图示| center | 700x0](https://vuex.vuejs.org/en/images/vuex.png)
+![@vuex工作图示](https://vuex.vuejs.org/vuex.png)
 
 ### 样式结构
 
