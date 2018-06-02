@@ -99,11 +99,11 @@ disqus_shortname: false
 uyan_uid: false
 # 是否使用 gitment，https://github.com/imsun/gitment
 
-gitment:
-  owner: x-thanatos
-  repo: x-thanatos.github.io
-  client_id: 072f0dbdab90b7a353d2
-  client_secret: 1db079ae4eb81376913b9ac88605039565367750
+gitment: false
+#  owner: x-thanatos
+#  repo: x-thanatos.github.io
+#  client_id: 072f0dbdab90b7a353d2
+#  client_secret: 1db079ae4eb81376913b9ac88605039565367750
 
 # Valine Comment system. https://valine.js.org
 valine:
