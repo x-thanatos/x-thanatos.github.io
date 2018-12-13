@@ -7,13 +7,13 @@ title: Memory Planet
 subtitle:
 description:
 keywords:
-author: x-thanatos
+author: xbini
 language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://x-thanatos.github.io/public
+url: https://xbini.github.io/public
 root: /public
 permalink: :year/:month/:day/:title/
 permalink_defaults:
