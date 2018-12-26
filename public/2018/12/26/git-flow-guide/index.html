@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>git-flow 开发模型 | Memory Planet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="git-flow 开发模型参考自以下几篇文章：  https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow http://www.ruanyifeng.com/blog/2015/12/git-workflow.html http://danielkummer.github.io/git-flow-ch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git-flow 开发模型">
+<meta property="og:url" content="https://xbini.github.io/public/2018/12/26/git-flow-guide/index.html">
+<meta property="og:site_name" content="Memory Planet">
+<meta property="og:description" content="git-flow 开发模型参考自以下几篇文章：  https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow http://www.ruanyifeng.com/blog/2015/12/git-workflow.html http://danielkummer.github.io/git-flow-ch">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-26T12:21:36.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git-flow 开发模型">
+<meta name="twitter:description" content="git-flow 开发模型参考自以下几篇文章：  https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow http://www.ruanyifeng.com/blog/2015/12/git-workflow.html http://danielkummer.github.io/git-flow-ch">
+    
+        <link rel="alternate" type="application/atom+xml" title="Memory Planet" href="/public/atom.xml">
+    
+    <link rel="shortcut icon" href="/public/img/favicon.ico">
+    <link rel="stylesheet" href="/public/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/public/img/brand.jpg)">
+      <div class="brand">
+        <a href="/public/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/public/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">xbini</h5>
+          <a href="mailto:xluobin@163.com" title="xluobin@163.com" class="mail">xluobin@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/public/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/xbini" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">git-flow 开发模型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">git-flow 开发模型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-26T12:21:36.806Z" itemprop="datePublished" class="page-time">
+  2018-12-26
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#git-flow-开发模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">git-flow 开发模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定制规范"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定制规范</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发人员"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">开发人员</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发负责人"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">开发负责人</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#测试网"><span class="post-toc-number">1.1.2.1.</span> <span class="post-toc-text">测试网</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#现网"><span class="post-toc-number">1.1.2.2.</span> <span class="post-toc-text">现网</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#备注"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">备注</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-git-flow-guide"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">git-flow 开发模型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-26 20:21:36" datetime="2018-12-26T12:21:36.806Z"  itemprop="datePublished">2018-12-26</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="git-flow-开发模型"><a href="#git-flow-开发模型" class="headerlink" title="git-flow 开发模型"></a>git-flow 开发模型</h2><p>参考自以下几篇文章：</p>
+<ul>
+<li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/git-workflow.html</a></li>
+<li><a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="noopener">http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html</a></li>
+</ul>
+<h3 id="定制规范"><a href="#定制规范" class="headerlink" title="定制规范"></a>定制规范</h3><h4 id="开发人员"><a href="#开发人员" class="headerlink" title="开发人员"></a>开发人员</h4><ol>
+<li><p>被分配到任务时，从<code>develop</code>分支分出特性分支。</p>
+<blockquote>
+<p>特性分支命名格式: <code>feature/name[#***]</code>，如果有分配的 issue，注明 issue id(可选)。<br>样例：<code>feature/batch-update(#657)</code></p>
+</blockquote>
+</li>
+<li><p>特性分支开发完成后，向 <code>develop</code> 分支发起 <strong>PR</strong>。开发人员相互 review（可由负责人指定审阅者）。持续提交直至 <strong>PR</strong> 被接受。</p>
+<p> 一旦 <strong>PR</strong> 被接受合并，删除该特性分支。（如果未发布前发现隐藏漏洞，另开<code>fix</code>分支进行修复）</p>
+</li>
+</ol>
+<blockquote>
+<p>开发时难以避免出现需要修复 bug 的情况（非 hotfix）。<br>这时如果 bug 的修复可以独立存在，不影响特性分支的话，<br>需另起<strong>修复分支</strong><code>fix/name[#***]</code>，处理方案基本跟特性分支一样。</p>
+</blockquote>
+<p><strong>总的来说</strong>，开发人员主要接触 <code>develop</code> 分支、<strong>特性分支</strong>、<strong>修复分支</strong>。</p>
+<h4 id="开发负责人"><a href="#开发负责人" class="headerlink" title="开发负责人"></a>开发负责人</h4><h5 id="测试网"><a href="#测试网" class="headerlink" title="测试网"></a>测试网</h5><ol>
+<li>当产品进行部署时，将 <code>develop</code> 分支分出 <code>release</code> 分支（打tag），提交到测试网。<code>release</code> 分支冻结所有新特性的增加（特殊情况除外）。</li>
+<li>测试网发现的Bug，直接在<code>release</code>分支进行提交。</li>
+<li>待<code>release</code>分支稳定后，合并到<code>master</code>（tag: stable），将<code>master</code>分支发布到现网。<br>也合并至 <code>develop</code> 分支，保持 <code>develop</code> 分支的稳定性。而后，删除该<code>release</code>分支。</li>
+</ol>
+<h5 id="现网"><a href="#现网" class="headerlink" title="现网"></a>现网</h5><ol>
+<li>现网发现的bug，直接在 <code>master</code> 分出 <code>hotfix</code>（格式类似特性分支或者<code>hotfix/issue-***</code>） 分支，进行修复。</li>
+<li><code>master</code>分支稳定后，合并回<code>develop</code>分支，删除所有<code>hotfix</code>分支。</li>
+</ol>
+<blockquote>
+<p>上述只是说明职责的划分，具体职责可以视情况按需分配。</p>
+</blockquote>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>各类 IDE 或者 git 管理工具都提供了 git flow 的集成管理。</p>
+<p>如： SourceTree, WebStorm, GitKraken, Sublime Text</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-26T12:21:36.806Z" itemprop="dateUpdated">2018-12-26 20:21:36</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/public/2018/12/26/git-flow-guide/" target="_blank" rel="external">https://xbini.github.io/public/2018/12/26/git-flow-guide/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://xbini.github.io/public">
+            <img src="/public/img/avatar.jpg" alt="xbini">
+            xbini
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&title=《git-flow 开发模型》 — Memory Planet&pic=https://xbini.github.io/public/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&title=《git-flow 开发模型》 — Memory Planet&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xbini.github.io/public/2018/12/26/git-flow-guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git-flow 开发模型》 — Memory Planet&url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&via=https://xbini.github.io/public" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/public/2018/12/26/ci-development/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">持续集成设计文档</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/public/2018/12/26/git-management-guide/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git 管理使用指导</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢小哥哥，小姐姐们~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/public/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/public/img/wechat.png" data-alipay="/public/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/public/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>xbini &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&title=《git-flow 开发模型》 — Memory Planet&pic=https://xbini.github.io/public/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&title=《git-flow 开发模型》 — Memory Planet&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xbini.github.io/public/2018/12/26/git-flow-guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git-flow 开发模型》 — Memory Planet&url=https://xbini.github.io/public/2018/12/26/git-flow-guide/&via=https://xbini.github.io/public" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xbini.github.io/public/2018/12/26/git-flow-guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xbini.github.io/public/2018/12/26/git-flow-guide/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/public/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/public/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/public/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
