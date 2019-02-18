@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用装饰器开发Vue组件 | Memory Planet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="前言 你是否写腻了.vue单文件组件 你是否面对复杂.vue单文件组件代码量感到头晕眼花 你是否想尝试换一种姿势coding 你是否渴望改变  背景 笔者有Angular经验，被它的设计理念深深折服（当然，学的时候比较苦逼），有一种“世间竟有如此出尘脱俗的女子”的感觉。 个人比较喜欢以模板，代码，样式文件分离的方式编写声明式组件。 接盘旧项目（技术栈：Vue全家桶），发现大大小小的组件几乎都是使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用装饰器开发Vue组件">
+<meta property="og:url" content="https://xbini.github.io/public/2019/02/18/decorator-vue/index.html">
+<meta property="og:site_name" content="Memory Planet">
+<meta property="og:description" content="前言 你是否写腻了.vue单文件组件 你是否面对复杂.vue单文件组件代码量感到头晕眼花 你是否想尝试换一种姿势coding 你是否渴望改变  背景 笔者有Angular经验，被它的设计理念深深折服（当然，学的时候比较苦逼），有一种“世间竟有如此出尘脱俗的女子”的感觉。 个人比较喜欢以模板，代码，样式文件分离的方式编写声明式组件。 接盘旧项目（技术栈：Vue全家桶），发现大大小小的组件几乎都是使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-18T02:30:13.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用装饰器开发Vue组件">
+<meta name="twitter:description" content="前言 你是否写腻了.vue单文件组件 你是否面对复杂.vue单文件组件代码量感到头晕眼花 你是否想尝试换一种姿势coding 你是否渴望改变  背景 笔者有Angular经验，被它的设计理念深深折服（当然，学的时候比较苦逼），有一种“世间竟有如此出尘脱俗的女子”的感觉。 个人比较喜欢以模板，代码，样式文件分离的方式编写声明式组件。 接盘旧项目（技术栈：Vue全家桶），发现大大小小的组件几乎都是使用">
+    
+        <link rel="alternate" type="application/atom+xml" title="Memory Planet" href="/public/atom.xml">
+    
+    <link rel="shortcut icon" href="/public/img/favicon.ico">
+    <link rel="stylesheet" href="/public/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/public/img/brand.jpg)">
+      <div class="brand">
+        <a href="/public/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/public/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">xbini</h5>
+          <a href="mailto:xluobin@163.com" title="xluobin@163.com" class="mail">xluobin@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/public/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/xbini" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用装饰器开发Vue组件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用装饰器开发Vue组件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-18T02:29:13.250Z" itemprop="datePublished" class="page-time">
+  2019-02-18
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">2.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">3.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始"><span class="post-toc-number">4.</span> <span class="post-toc-text">开始</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-decorator-vue"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用装饰器开发Vue组件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-18 10:29:13" datetime="2019-02-18T02:29:13.250Z"  itemprop="datePublished">2019-02-18</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>你是否写腻了.vue单文件组件</li>
+<li>你是否面对复杂.vue单文件组件代码量感到头晕眼花</li>
+<li>你是否想尝试换一种姿势coding</li>
+<li>你是否渴望改变</li>
+</ol>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>笔者有<code>Angular</code>经验，被它的设计理念深深折服（当然，学的时候比较苦逼），有一种“世间竟有如此出尘脱俗的女子”的感觉。</li>
+<li>个人比较喜欢以模板，代码，样式文件分离的方式编写声明式组件。</li>
+<li>接盘旧项目（技术栈：<code>Vue</code>全家桶），发现大大小小的组件几乎都是使用.vue单文件组件编写的，加之组件粒度过大，经常穿梭于一大堆css，js，html中改bug，毫无开发体验，在几经思考后，开始用新的方法编写组件。</li>
+</ul>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<p>本文所需要的主要知识（相信各位都已经玩上手的啦！）</p>
+<ul>
+<li><code>Decorator</code>设计模式</li>
+<li><a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="noopener">Javascript Decorator</a></li>
+</ul>
+</blockquote>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>话说，磨刀不误砍材工。重新看了一遍<code>Vue</code>官方文档，发现了<a href="https://cn.vuejs.org/v2/guide/typescript.html#%E5%9F%BA%E4%BA%8E%E7%B1%BB%E7%9A%84-Vue-%E7%BB%84%E4%BB%B6" target="_blank" rel="noopener">这样</a>一种组件编写方式（<a href="https://github.com/vuejs/vue-class-component" target="_blank" rel="noopener">vue-class-component</a>）。心生一悦，这看上去有点眼熟啊（<code>Angular</code>使用了<code>Decorator</code>），于是有了下面的这样组件代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'vue-class-component'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./list.compoent.scss'</span></span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;ol class="list"&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt; count: &#123;&#123; length &#125;&#125; &lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li v-for="(item, index) in list" :key="index"&gt;</span></span><br><span class="line"><span class="string">           &#123;&#123;item&#125;&#125;</span></span><br><span class="line"><span class="string">        &lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;/ol&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ListPageComponent</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">    list = []</span><br><span class="line"></span><br><span class="line">    get length() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.list.length</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    loadList() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">(resolve</span>) =&gt;</span> &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                resolve(<span class="built_in">Object</span>.keys(<span class="built_in">window</span>))</span><br><span class="line">            &#125;, <span class="number">1000</span>)</span><br><span class="line">        &#125;))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initialization() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.loadList()</span><br><span class="line">            .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.list = res</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.initialization()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看到大量的Html字符串模板出现在代码里是不是觉得不美观，影响代码表达呢。咱们想个办法吧。记得<code>Webpack</code>有个<code>loader</code>吗？没错就是<a href="https://github.com/webpack-contrib/html-loader" target="_blank" rel="noopener">html-loader</a>（它的主要功能就是把.html文件内容转换成string，这样我们就可以在.html文件中“放飞自我”了，还能用到IDE自带的html智能提示，是不是美美的！，webpack配置就略过了，相信各位已经烂熟于心。），一顿<code>yarn add</code>（<code>npm i</code>）操作之后代码的上半部分变成了这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'vue-class-component'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./list.compoent.scss'</span></span><br><span class="line"><span class="keyword">import</span> template <span class="keyword">from</span> <span class="string">'./list.component.html'</span></span><br><span class="line"></span><br><span class="line">@Component(&#123; template &#125;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>怎么样，这样咱们就抽离了静态模板和代码（虽然只是换了一种写法–!），让它们在各自的文件中发挥作用，是不是很舒服。</p>
+<p>目前为止，我们现在好像只用到了<code>@Component</code>类装饰器，话说还有类方法装饰器和类属性装饰器呢？细心的你肯定会在<a href="https://github.com/vuejs/vue-class-component" target="_blank" rel="noopener">vue-class-component</a>下面发现这个：<a href="https://github.com/kaorun343/vue-property-decorator" target="_blank" rel="noopener">vue-property-decorator</a>。于是乎，通过它，为我们的组件添加一个新的功能吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component, Vue, Watch &#125; <span class="keyword">from</span> <span class="string">'vue-property-decorator'</span></span><br><span class="line">...</span><br><span class="line">@Component(&#123; template &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ListPageComponent</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    @Watch(<span class="string">'list'</span>)</span><br><span class="line">    onListChange(newVal, oldVal) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(newVal, oldVal)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>让我们从头看一遍组件，似乎少了点Vue全家桶应用组件的一般“套路”，没错，就是状态管理<a href="https://vuex.vuejs.org/zh/guide/" target="_blank" rel="noopener">vuex</a>，接下来，GitHub上逛了一圈，又被我找到了这个：<a href="https://github.com/ktsn/vuex-class" target="_blank" rel="noopener">vuex-class</a>，接着，又是一顿<code>yarn add</code>（<code>npm i</code>）操作之后代码最终变成了这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component, Vue, Watch &#125; <span class="keyword">from</span> <span class="string">'vue-property-decorator'</span></span><br><span class="line"><span class="keyword">import</span> &#123; namespace &#125; <span class="keyword">from</span> <span class="string">'vuex-class'</span></span><br><span class="line"><span class="keyword">import</span> template <span class="keyword">from</span> <span class="string">'./list.component.html'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./list.compoent.scss'</span></span><br><span class="line"><span class="keyword">import</span> &#123; actionTypes &#125; <span class="keyword">from</span> <span class="string">'../../core/store/window-properties/actions'</span></span><br><span class="line"><span class="keyword">import</span> &#123; mutationTypes &#125; <span class="keyword">from</span> <span class="string">'../../core/store/window-properties/mutations'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> localModule = namespace(<span class="string">'windowProperties'</span>)</span><br><span class="line"></span><br><span class="line">@Component(&#123; template &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ListPageComponent</span> <span class="keyword">extends</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">    @localModule.State(<span class="string">'list'</span>) list</span><br><span class="line"></span><br><span class="line">    @localModule.Getter(<span class="string">'listLength'</span>) length</span><br><span class="line"></span><br><span class="line">    @localModule.Mutation(mutationTypes.RESTORE_LIST)</span><br><span class="line">    resetList() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @localModule.Action(actionTypes.GET_LIST)</span><br><span class="line">    loadList() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Watch(<span class="string">'list'</span>)</span><br><span class="line">    onListChange(newVal, oldVal) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(newVal, oldVal)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initialization() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.loadList()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.initialization()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    destroyed() &#123;</span><br><span class="line">        <span class="keyword">this</span>.resetList()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如此，乍一看，代码更加<code>OO</code>了呢！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>都写成这样了，为何不直接使用typescript呢？<blockquote>
+<p>之所以用<code>javascript</code>，是因为自ES6版本以来，ECMA规范更新频繁，如今已经拥有许多令人振奋的特性。作为开发者，笔者认为应该有意识的通过原生规范去接触这些新特性，并且拥抱它们，努力将其用于实践，而不只是停留在了解。</p>
+</blockquote>
+</li>
+<li>装饰器的出现，从语法上补足了语言在设计模式上的欠缺，当你完全掌握装饰器之后，你会发现它的作用远不如此。</li>
+<li>这里有一个缺陷，就是单文件组件的<code>scope css</code>特性不存在了，目前笔者还未找到替代方案，或许<a href="https://github.com/css-modules/css-modules" target="_blank" rel="noopener">css-modules</a>是个不错的选择。</li>
+<li>这样编写代码，在应用装饰器的同时，分离了组件各个部分，使得组件代码更加纯粹。当然，并不是所有组件都推荐这样做，根据自己的组件逻辑和复杂度灵活选择。相对简单的组件，.vue单文件组件依旧是不错的选择。</li>
+<li>本文旨在倡导开发者拥抱新特性，持续学习，用于实践。</li>
+<li>关于组件代码长度，决定因素依旧是你对组件粒度的划分，而不在于用什么样的方式编写代码。</li>
+<li><p>本文代码来自笔者<a href="https://github.com/x-thanatos/vue-start" target="_blank" rel="noopener">github仓库</a>（笔者用来实验webpack特性以及尝试一些小工具）。</p>
+<p>ps：以上内容，均源自笔者日常工作学习中总结积累，如有错误，还请指正，不胜感激。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-02-18T02:30:13.032Z" itemprop="dateUpdated">2019-02-18 10:30:13</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/public/2019/02/18/decorator-vue/" target="_blank" rel="external">https://xbini.github.io/public/2019/02/18/decorator-vue/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://xbini.github.io/public">
+            <img src="/public/img/avatar.jpg" alt="xbini">
+            xbini
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xbini.github.io/public/2019/02/18/decorator-vue/&title=《使用装饰器开发Vue组件》 — Memory Planet&pic=https://xbini.github.io/public/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xbini.github.io/public/2019/02/18/decorator-vue/&title=《使用装饰器开发Vue组件》 — Memory Planet&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xbini.github.io/public/2019/02/18/decorator-vue/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用装饰器开发Vue组件》 — Memory Planet&url=https://xbini.github.io/public/2019/02/18/decorator-vue/&via=https://xbini.github.io/public" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xbini.github.io/public/2019/02/18/decorator-vue/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/public/2018/12/13/notepad/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">学习笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢小哥哥，小姐姐们~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/public/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/public/img/wechat.png" data-alipay="/public/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/public/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>xbini &copy; 2018 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xbini.github.io/public/2019/02/18/decorator-vue/&title=《使用装饰器开发Vue组件》 — Memory Planet&pic=https://xbini.github.io/public/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xbini.github.io/public/2019/02/18/decorator-vue/&title=《使用装饰器开发Vue组件》 — Memory Planet&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xbini.github.io/public/2019/02/18/decorator-vue/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用装饰器开发Vue组件》 — Memory Planet&url=https://xbini.github.io/public/2019/02/18/decorator-vue/&via=https://xbini.github.io/public" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xbini.github.io/public/2019/02/18/decorator-vue/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xbini.github.io/public/2019/02/18/decorator-vue/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/public/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/public/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/public/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
