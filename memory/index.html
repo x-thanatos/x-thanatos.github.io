@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Memory</title>
-    <script src="./index.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.2.5/polyfill.min.js"></script>
+    <script src="./img2ascii.es5.js"></script>
     <style>
         span {
             opacity: 0;
@@ -15,7 +16,7 @@
 </body>
 <script>
     function init() {
-        let ele = new imgToAscii('./xdd.jpg', 0.1)
+        var ele = new imgToAscii('./xdd.jpg', 0.1)
         ele.displayColor()
     }
 
