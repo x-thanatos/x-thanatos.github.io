@@ -108,7 +108,7 @@ class imgToAscii {
             render()
             if (i >= length) {
                 const h3 = document.createElement('h3')
-                h3.innerHTML = `Complete!(${length} point)`
+                h3.innerHTML = `Finished!(${length} points)`
                 container.append(h3)
                 clearInterval(timer)
             }
