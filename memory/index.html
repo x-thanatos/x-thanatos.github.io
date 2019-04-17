@@ -7,8 +7,44 @@
     <script src="https://cdn.bootcss.com/babel-polyfill/7.2.5/polyfill.min.js"></script>
     <script src="./img2ascii.es5.js"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+
+        body {
+            padding: 8px;
+            position: relative;
+        }
+
         span {
             opacity: 0;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateY(0px) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .point {
+            position: absolute;
+            color: #db4437;
+            cursor: default;
+            animation-fill-mode: forwards;
+            overflow: hidden;
+            height: 22px;
+            line-height: 22px;
+            user-select: none;
         }
     </style>
 </head>
@@ -16,11 +52,48 @@
 
 </body>
 <script>
-    function init() {
-        var ele = new imgToAscii('./xdd.jpg', 0.1)
-        ele.displayColor()
-    }
+    (function (window, document) {
+        var ANIMATION_DURATION = 3000
+        var CONTENT = ['❤️', '😙', '😍', '😜', '😘', '🤗', '😳']
 
-    window.addEventListener('DOMContentLoaded', init)
+        function init() {
+            var ele = new imgToAscii('./xdd.jpg', 0.1)
+            ele.displayColor()
+        }
+
+        function getElementByString(elementString) {
+            var dom = document.createElement('div')
+            dom.innerHTML = elementString
+            return dom.children[0]
+        }
+
+        function getRandomInteger(max, min) {
+            var minimal = min || 0
+            var maximal = max || 10
+            var value = -1
+            while (value < minimal || value > maximal) {
+                value = parseInt(Math.random() * 10)
+            }
+            return value
+        }
+
+        function effect(e) {
+            var content = CONTENT[0]
+            var node = getElementByString('<div class="point">' + content + '</div>')
+            node.style.top = e.offsetY - 20 + 'px'
+            node.style.left = e.clientX - 7 + 'px'
+            node.style.animation = 'slide ' + ANIMATION_DURATION + 'ms'
+            setTimeout(function () {
+                document.body.append(node)
+            })
+            setTimeout(function () {
+                document.body.removeChild(node)
+            }, ANIMATION_DURATION - 100)
+        }
+
+        window.addEventListener('DOMContentLoaded', init)
+        document.body.addEventListener('click', effect)
+        document.body.addEventListener('mousemove', effect)
+    }(window, document))
 </script>
 </html>
