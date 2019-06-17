@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Memory</title>
     <script src="https://cdn.bootcss.com/babel-polyfill/7.2.5/polyfill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script src="./img2ascii.es5.js"></script>
     <style>
         * {
             box-sizing: border-box;
         }
 
-        html, body {
+        html,
+        body {
             margin: 0;
             height: 100%;
         }
@@ -30,6 +33,7 @@
                 transform: translateY(0px) scale(1);
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(-500px) scale(0);
                 opacity: 0;
@@ -46,12 +50,15 @@
             line-height: 22px;
             user-select: none;
         }
+
     </style>
 </head>
+
 <body>
 
 </body>
 <script>
+    var _ = window._;
     (function (window, document) {
         var ANIMATION_DURATION = 3000
         var CONTENT = ['❤️', '😙', '😍', '😜', '😘', '🤗', '😳']
@@ -78,7 +85,8 @@
         }
 
         function effect(e) {
-            var content = CONTENT[0]
+            // var content = CONTENT[0]
+            var content = CONTENT[getRandomInteger(CONTENT.length - 1)]
             var node = getElementByString('<div class="point">' + content + '</div>')
             node.style.top = e.offsetY - 20 + 'px'
             node.style.left = e.clientX - 7 + 'px'
@@ -91,9 +99,18 @@
             }, ANIMATION_DURATION - 100)
         }
 
+        // 防抖
+        var debounceEffect = _.debounce(effect, 200, {
+            'leading': true,
+            'trailing': false
+        });
+        // 节流
+        var throttleEffect = _.throttle(effect, 200);
+
         window.addEventListener('DOMContentLoaded', init)
-        document.body.addEventListener('click', effect)
-        document.body.addEventListener('mousemove', effect)
+        document.body.addEventListener('click', debounceEffect)
+        document.body.addEventListener('mousemove', throttleEffect)
     }(window, document))
 </script>
+
 </html>
