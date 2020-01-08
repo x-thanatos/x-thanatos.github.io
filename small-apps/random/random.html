@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>幸运密码来敲门</title>
+    <meta content="*/*, designed by diandian">
+    <script>
+        (function flexible(window, document) {
+            var docEl = document.documentElement
+            var dpr = window.devicePixelRatio || 1
+            // adjust body font size
+            function setBodyFontSize() {
+                if (document.body) {
+                    document.body.style.fontSize = (12 * dpr) + 'px'
+                } else {
+                    document.addEventListener('DOMContentLoaded', setBodyFontSize)
+                }
+            }
+            setBodyFontSize();
+            // set 1rem = viewWidth / 10
+            function setRemUnit() {
+                var rem = docEl.clientWidth / 10
+                docEl.style.fontSize = rem + 'px'
+            }
+            setRemUnit()
+            // reset rem unit on page resize
+            window.addEventListener('resize', setRemUnit)
+            window.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    setRemUnit()
+                }
+            })
+            // detect 0.5px supports
+            if (dpr >= 2) {
+                var fakeBody = document.createElement('body')
+                var testElement = document.createElement('div')
+                testElement.style.border = '.5px solid transparent'
+                fakeBody.appendChild(testElement)
+                docEl.appendChild(fakeBody)
+                if (testElement.offsetHeight === 1) {
+                    docEl.classList.add('hairlines')
+                }
+                docEl.removeChild(fakeBody)
+            }
+        }(window, document))
+
+    </script>
+    <link href="./radom.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="mask slide-in-elliptic-top-fwd" id="mask">
+        <h1 class="tracking-in-contract-bck-top" id="result">33</h1>
+    </div>
+    <div class="logo">
+        <img src="./logo.png" alt="logo">
+    </div>
+    <div class="view">
+        <h3 class="focus-in-contract-bck">幸运密码来敲门</h3>
+        <p id="random">0</p>
+        <div class="operation">
+            <button type="button" class="btn start" id="start" onclick="window.start()">
+                <span>开始</span>
+            </button>
+            <button type="button" class="btn stop" style="display: none" id="stop" onclick="window.stop()">
+                <span>停止</span>
+            </button>
+        </div>
+        <ul id="results">
+        </ul>
+    </div>
+    <div class="setting">
+        <ul class="input">
+            <li>
+                <label for="min">最小值：</label>
+                <input type="number" id="min" min="0" placeholder="默认值：0">
+            </li>
+            <li>
+                <label for="max">最大值：</label>
+                <input type="number" id="max" min="20" placeholder="默认值：50">
+            </li>
+            <li>
+                <label for="size">结果数：</label>
+                <input type="number" id="size" min="1" placeholder="默认值：20">
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="./radom.js"></script>
+
+</html>
